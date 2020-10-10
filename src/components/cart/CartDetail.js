@@ -1,3 +1,4 @@
+import alertify from "alertifyjs";
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Table, Button } from "reactstrap";
@@ -8,6 +9,7 @@ class CartDetail extends Component {
 
 removeFromCart=(product)=>{
 this.props.actions.removeFromCart(product)
+alertify.error(product.productName+" Sepetten Silindi !")
 }
 
   render() {
