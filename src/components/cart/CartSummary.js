@@ -10,7 +10,8 @@ import {
 } from "reactstrap";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as cartAction from "../../redux/actions/cartAcitons"
+import * as cartAction from "../../redux/actions/cartAcitons";
+import { Link } from "react-router-dom";
 
 class cartSummary extends Component {
   renderEmpty() {
@@ -29,13 +30,22 @@ class cartSummary extends Component {
         <DropdownMenu right>
           {this.props.cart.map((cartItem) => (
             <DropdownItem key={cartItem.product.id}>
-                <Badge color="danger" onClick={()=>this.props.actions.removeFromCart(cartItem.product)}>X</Badge>
+              <Badge
+                color="danger"
+                onClick={() =>
+                  this.props.actions.removeFromCart(cartItem.product)
+                }
+              >
+                X
+              </Badge>
               {cartItem.product.productName}
               <Badge color="success">{cartItem.quantity}</Badge>
             </DropdownItem>
           ))}
           <DropdownItem divider />
-          <DropdownItem>Sepete Git</DropdownItem>
+          <DropdownItem>
+            <Link to="/cart">Sepete Git</Link>
+          </DropdownItem>
         </DropdownMenu>
       </UncontrolledDropdown>
     );
@@ -56,11 +66,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-      actions: {
-        removeFromCart: bindActionCreators(cartAction.removeFromCart, dispatch),
-      }
-    };
-  }
+  return {
+    actions: {
+      removeFromCart: bindActionCreators(cartAction.removeFromCart, dispatch),
+    },
+  };
+}
 
-export default connect(mapStateToProps,mapDispatchToProps)(cartSummary);
+export default connect(mapStateToProps, mapDispatchToProps)(cartSummary);
