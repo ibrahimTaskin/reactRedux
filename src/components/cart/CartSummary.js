@@ -25,7 +25,7 @@ class cartSummary extends Component {
     return (
       <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
-          Options
+          Sepet
         </DropdownToggle>
         <DropdownMenu right>
           {this.props.cart.map((cartItem) => (
@@ -37,6 +37,7 @@ class cartSummary extends Component {
                 }
               >
                 X
+                
               </Badge>
               {cartItem.product.productName}
               <Badge color="success">{cartItem.quantity}</Badge>
