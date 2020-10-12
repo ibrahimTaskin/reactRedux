@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import { Container } from "reactstrap";
 import CartDetail from "../cart/CartDetail";
 import Navi from "../navi/Navi";
+import AddOrUpdateProduct from "../products/AddOrUpdateProduct";
 import Dashboard from "./Dashboard";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route exact path="/" component={Dashboard} />
           <Route exact path="/product" component={Dashboard} />
           <Route exact path="/cart" component={CartDetail} />
+          <Route path="/saveproduct/:productId" component={AddOrUpdateProduct} />
         </Switch>
        
       </Container>
