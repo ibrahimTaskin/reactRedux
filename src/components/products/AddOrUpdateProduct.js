@@ -15,6 +15,7 @@ function AddOrUpdateProduct({
 }) {
   //product state ini setProcut ile set edicem --> setState yerine
   const [product, setProduct] = useState({ ...props.product });
+  const [errors, setErrors] = useState({});
 
   useEffect(() => {
     if (categories.length === 0) {
@@ -30,8 +31,25 @@ function AddOrUpdateProduct({
       ...previousProduct,
       [name]: name === "categoryId" ? parseInt(value, 10) : value,
     }));
+    validate(name,value);
+    
+   
   }
 
+  function validate(name,value){
+    if(name==="productName"&&value===""){
+      setErrors((previusErrors) => ({
+     ...previusErrors,
+     productName: "Ürün İsmi Olmalıdır.",
+   }));
+   }
+   else{
+    setErrors((previusErrors) => ({
+      ...previusErrors,
+      productName: "",
+    }));
+   }
+  }
   function handleSave(event) {
     event.preventDefault();
     saveProduct(product).then(() => {
@@ -45,12 +63,13 @@ function AddOrUpdateProduct({
       categories={categories}
       onChange={handleChange}
       onSave={handleSave}
+      errors={errors}
     />
   );
 }
 
 export function getProductById(products, productId) {
-  let product = products.find((product) => product.id === productId) || null;
+  let product = products.find((product) => product.id == productId) || null;
   return product;
 }
 

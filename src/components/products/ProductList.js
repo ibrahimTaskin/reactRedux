@@ -17,6 +17,10 @@ class ProductList extends Component {
     alertify.warning(product.productName+" Sepete Eklendi.",2)
   }
 
+  removoFromCart=(product)=>{
+    this.props.actions.removeFromCart(product)
+    alertify.error(product.productName+" Sepetten silindi.",2)
+  }
   render() {
     return (
       <div>
@@ -26,6 +30,7 @@ class ProductList extends Component {
             {this.props.currentCategory.categoryName}
           </Badge>
         </h3>
+        <Button color="success"><Link to="/saveproduct">Yeni Ürün Ekle</Link></Button>
         <Table>
           <thead>
             <tr>
@@ -66,7 +71,8 @@ function mapDispatchToProps(dispatch) {
   return {
     actions: {
       getProducts: bindActionCreators(productActions.getProducts, dispatch),
-      addToCart:bindActionCreators(cartAction.addToCart,dispatch)
+      addToCart:bindActionCreators(cartAction.addToCart,dispatch),
+      removeFromCart: bindActionCreators(cartAction.removeFromCart, dispatch),
     },
   };
 }
